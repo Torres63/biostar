@@ -1,64 +1,81 @@
 {% load staticfiles %}
 {% load server_tags %}
-<nav class="py-3 bg-dark text-white border-bottom  ">
-    <div class="container">
-
-        <nav class="nav nav-pills nav-justified">
-            {% for word in CATEGORIES %}
-            <a class="nav-link text-white" href="{% url 'topic-list' topic=word %}">{{ word }}</a>
-
-            {% endfor %}
-            <a class="nav-link text-white" href="{% url 'planet' %}">Planet</a>
-            <a class="nav-link text-white" href="{% url 'tag-list' %}">All</a>
-
-        </nav>
-    </div>
-</nav>
+<div class="bg-danger text-white">
+    <a href="/"><img width="250px" src="{% static "img/vectorpaint.svg" %}"></a>
+</div>
 <header class="py-3 mb-4 border-bottom">
     <div class="container d-flex flex-wrap justify-content-center">
         <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
-            <span class="fs-4">Bienvenido</span>
+            <span class="fs-4">Lecciones Aprendidas</span>
         </a>
         <ul class="nav nav-pills">
             {% if user.is_authenticated %}
-            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-user"></i> Hola <span class="badge">{% get_count COUNTS 'messages' %}</span>
-                <span class="caret"></span>
-            </button>
-            <li class="nav-item"><a href="{% url 'topic-list' topic='myposts' %}" class="nav-link">My Posts</a></li>
+                {#Dropdown#}
+                <div class="dropdown">
+                    <button class="btn btn-success btn-m dropdown-toggle" type="button"
+                            id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-user"></i> {{ user.name }} <span
+                            class="badge">{% get_count COUNTS 'messages' %}</span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <a class="dropdown-item"
+                               href="{% url 'topic-list' topic='myposts' %}">My Posts
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                               href="{% url 'user-messages' %}">My Messages
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                               href="{% url 'topic-list' topic='bookmarks' %}">My Bookmarks
+                            </a>
+                        </li>
 
-            <li class="nav-item"><a href="{% url 'user-messages' %}" class="nav-link">My Messages<span class="badge">{% get_count COUNTS 'messages' %}</span></a>
-            </li>
-            <li class="nav-item"><a href="{% url 'topic-list' topic='bookmarks' %}" class="nav-link">My Bookmarks</a>
-            </li>
+                        <li>
+                            <a class="dropdown-item"
+                               href="{% url 'topic-list' topic='mytags' %}">My Tags
+                            </a>
+                        </li>
 
-            <div class="{% current request 'user-list' %}">
-                <li class="nav-item"><a href="{% url 'user-list' %}" class="nav-link">Community</a>
-                </li>
 
-            </div>
+                    </ul>
+                </div>
 
-            <div class="{% current request 'user-votes' %}">
-                <li class="nav-item"><a href="{% url 'user-votes' %}" class="nav-link">Votes <span class="badge">{% get_count COUNTS 'votes' %}</span>
-                </a>
 
-            </div>
 
-            <div class="{% active 'mytags' topic %}">
-                  <li class="nav-item"><a href="{% url 'topic-list' topic='mytags' %}" class="nav-link">My Tags</a>
-                </li>
-            </div>
 
-            <div class="{% active 'following' topic %}">
+                <div class="{% current request 'user-list' %}">
+                    <li class="nav-item"><a href="{% url 'user-list' %}" class="nav-link">Community</a>
+                    </li>
 
-                <li class="nav-item"><a href="{% url 'topic-list' topic='following' %}" class="nav-link">Following</a>
-                </li>
-            </div>
+                </div>
 
-            <li class="nav-item"><a href="{% url 'new-post' %}" class="nav-link">New Post</a></li>
-            <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Log Out</a></li>
+                <div class="{% current request 'user-votes' %}">
+                    <li class="nav-item"><a href="{% url 'user-votes' %}" class="nav-link">Votes <span
+                            class="badge">{% get_count COUNTS 'votes' %}</span>
+                    </a>
+
+                </div>
+
+
+
+                <div class="{% active 'following' topic %}">
+
+                    <li class="nav-item"><a href="{% url 'topic-list' topic='following' %}"
+                                            class="nav-link">Following</a>
+                    </li>
+                </div>
+
+                <li class="nav-item"><a href="{% url 'new-post' %}" class="nav-link">New Post</a></li>
+                <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Log Out</a></li>
             {% else %}
-            <li class="nav-item"><a href="{% url 'login' %}" class="nav-link active" aria-current="page">Log in</a></li>
+                <li class="nav-item"><a href="{% url 'login' %}" class="nav-link active" aria-current="page">Log in</a>
+                </li>
             {% endif %}
 
         </ul>

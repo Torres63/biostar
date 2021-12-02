@@ -306,7 +306,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.persona',
+    #'allauth.socialaccount.providers.persona',
     'allauth.socialaccount.providers.google',
     #'allauth.socialaccount.providers.github',
     # 'allauth.socialaccount.providers.facebook',
@@ -393,9 +393,9 @@ SOCIALACCOUNT_PROVIDERS = {
     #    'PROVIDER_SECRET_KEY': get_env("FACEBOOK_PROVIDER_SECRET_KEY"),
     # },
 
-    'persona': {
-        'REQUEST_PARAMETERS': {'siteName': 'Biostar'}
-    },
+    # 'persona': {
+    #     'REQUEST_PARAMETERS': {'siteName': 'Biostar'}
+    # },
 
     # 'github': {
     #    'SCOPE': ['email'],
@@ -490,7 +490,7 @@ SESSION_UPDATE_SECONDS = 10 * 60
 SESSION_COOKIE_NAME = "biostar2"
 
 # The number of posts to show per page.
-PAGINATE_BY = 25
+PAGINATE_BY = 10
 
 # Used by crispyforms.
 # CRISPY_FAIL_SILENTLY = not DEBUG

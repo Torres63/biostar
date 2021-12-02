@@ -1,0 +1,35 @@
+{% load socialaccount %}
+
+    {% for provider in socialaccount.providers %}
+        {% if provider.id == "openid" %}
+            <div class="list-group">
+
+                {% for brand in provider.get_brands %}
+                    <li>
+                        <a href="{% provider_login_url provider.id openid=brand.openid_url process=process %}"
+                           class="list-group-item list-group-item-action">
+                            {{ brand.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+                <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+            </div>
+
+            {#        {% for brand in provider.get_brands %}#}
+            {#            <li>#}
+            {#                <a title="{{ brand.name }}"#}
+            {#                   class="socialaccount_provider {{ provider.id }} {{ brand.id }}"#}
+            {#                   href="{% provider_login_url provider.id openid=brand.openid_url process=process %}">#}
+            {#                    {{ brand.name }}#}
+            {#                </a>#}
+            {#            </li>#}
+            {#        {% endfor %}#}
+        {% endif %}
+
+        <a href="{% provider_login_url provider.id process=process %}" type="button" class="btn btn-danger btn-lg btn-block">{{ provider.name }}</a>
+
+    {% endfor %}
+
+
+
+

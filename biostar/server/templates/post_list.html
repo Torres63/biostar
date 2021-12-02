@@ -14,9 +14,7 @@
                 {% for post in posts %}
                     {% post_count_box post '' topic %}
                 {% empty %}
-
                     <div class="alert alert-info">There are no results for this page.</div>
-
                 {% endfor %}
 
             </div>
@@ -30,9 +28,9 @@
 
             {% sidebar_votes RECENT_VOTES %}
 
-            {% sidebar_locations RECENT_USERS %}
-
-            {% sidebar_awards RECENT_AWARDS %}
+{#            {% sidebar_locations RECENT_USERS %}#}
+{##}
+{#            {% sidebar_awards RECENT_AWARDS %}#}
 
             {% sidebar_posts RECENT_REPLIES %}
 
