@@ -1,0 +1,120 @@
+{% extends "starbase.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+Sign Up.
+{% endblock %}
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="login-form bg-light mt-4 p-4">
+                <form method="POST" action="{% url 'account_login' %}" class="row g-3">
+                    {% csrf_token %}
+                    <h4>Bienvenido</h4>
+                    <div class="d-flex justify-content-center">
+                        <p>
+                            <a href="" class="btn btn-block btn-outline-info"> Login via Gmail</a>
+                            <a href="" class="btn btn-block btn-outline-primary"> Login via GYT</a>
+                        </p>
+                        {% if socialaccount.providers %}
+                        <p>{% blocktrans with site.name as site_name %}
+                            Click the name of a provider to log in or to sign up.{% endblocktrans %}</p>
+                        <div class="socialaccount_ballot">
+                            <ul class="socialaccount_providers" style="font-size:1.6em;">
+                                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                            </ul>
+                        </div>
+                        {% include "socialaccount/snippets/login_extra.html" %}
+                        {% endif %}
+                    </div>
+                    {{ form|crispy }}
+
+
+                    <hr>
+
+                    <div class="col-12">
+                        <a type="button" class="btn btn-outline-primary" href="{% url 'account_reset_password' %}">Forgot
+                            password?</a>
+
+                        <button type="submit" class="btn btn-dark float-end">Login</button>
+                    </div>
+                </form>
+                <hr class="mt-4">
+                <div class="col-12">
+                    <p class="text-center mb-0">Have not account yet? <a href="{% url 'signup' %}">Signup</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="row">-->
+
+<!--    <div class="col-md-6 col-md-offset-3">-->
+
+
+<!--        <div class="panel panel-default" style="margin-top:2em">-->
+<!--            <div class="panel-heading">-->
+<!--                <h3 class="panel-title">{% trans "Quick Login" %}</h3>-->
+<!--            </div>-->
+<!--            <div class="panel-body">-->
+
+
+<!--                <nav class="navbar navbar-light bg-light">-->
+<!--                    <form class="container-fluid justify-content-start">-->
+<!--                        <button class="btn btn-outline-success me-2" type="button">Main button</button>-->
+<!--                        <button class="btn btn-sm btn-outline-secondary" type="button">Smaller button</button>-->
+<!--                    </form>-->
+<!--                </nav>-->
+<!--                <div>-->
+<!--                    This is used for authentication only.-->
+<!--                    We can't access your timeline, see your friends or post on your behalf.-->
+<!--                </div>-->
+<!--                <div class="login-or" style="margin-top:1em">Do you need an account? &raquo;-->
+<!--                    <a role="button" class="btn btn-info" href="{% url 'signup' %}">Sign Up Here</a>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="col-md-6 col-md-offset-3">-->
+<!--        <div class="text-center" style="margin:2em 0em 2em 0em;">-->
+<!--            Do you have an email based account? Log in below:-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="col-md-6 col-md-offset-3">-->
+
+
+<!--        <div class="panel panel-default">-->
+<!--            <div class="panel-heading">-->
+<!--                <h3 class="panel-title">{% trans "Email Login" %}</h3>-->
+<!--            </div>-->
+<!--            <div class="panel-body">-->
+
+<!--                <form class="login" method="POST" action="{% url 'account_login' %}">-->
+<!--                    {% csrf_token %}-->
+
+<!--                    {{ form|crispy }}-->
+
+<!--                    {% if redirect_field_value %}-->
+<!--                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>-->
+<!--                    {% endif %}-->
+
+<!--                    <button type="submit" class="btn btn-success">{% trans "Sign In" %} &raquo;</button>-->
+
+<!--                    <span class="btn btn-default pull-right">-->
+<!--                            <a class="button" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %} &raquo;</a>-->
+<!--                        </span>-->
+
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+{% endblock %}
