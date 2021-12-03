@@ -101,6 +101,8 @@ class LongForm(forms.Form):
         label="Post Tags",
         required=True, validators=[valid_tag],
         help_text="Choose one or more tags to match the topic. To create a new tag just type it in and press ENTER.",
+
+
     )
 
     content = forms.CharField(widget=PagedownWidget, validators=[valid_language],
